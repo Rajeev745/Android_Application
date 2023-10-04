@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "507083527085",
+    "project_id": "android-assignment-be728",
+    "storage_bucket": "android-assignment-be728.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:507083527085:android:89dfc8e2906047520cc724",
+        "android_client_info": {
+          "package_name": "com.example.assignmentapplication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCbCVpHI4gMz6AlP40hNQCpBH_JyQorh9A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

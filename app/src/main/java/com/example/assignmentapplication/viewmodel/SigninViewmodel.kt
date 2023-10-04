@@ -1,0 +1,38 @@
+package com.example.assignmentapplication.viewmodel
+
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.assignmentapplication.utils.Resource
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.launch
+import javax.inject.Inject
+
+@HiltViewModel
+class SigninViewmodel @Inject constructor(private val firebaseAuth: FirebaseAuth) : ViewModel() {
+
+    private val _login = MutableSharedFlow<Resource<FirebaseUser>>()
+    val login = _login.asSharedFlow()
+
+    fun signingWithEmailAndPassword(email: String, password: String) {
+        viewModelScope.launch {
+            _login.emit(Resource.Loading())
+        }
+        firebaseAuth.signInWithEmailAndPassword(email, password)
+            .addOnSuccessListener {
+                viewModelScope.launch {
+                    it.user?.apply {
+                        _login.emit(Resource.Success(it.user))
+                    }
+                }
+            }
+            .addOnFailureListener {
+                viewModelScope.launch {
+                    _login.emit(Resource.Error(it.message.toString()))
+                }
+            }
+    }
+}
